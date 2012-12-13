@@ -121,10 +121,49 @@ Equation* e;
     STAssertEqualsWithAccuracy(sqrt(2.0), [e imaginary1], 0.00001, @"imaginary1 error");
     STAssertEqualsWithAccuracy(-sqrt(2.0), [e imaginary2], 0.00001, @"imaginary2 error");
 }
- */
+*/
 // あれあれ？ テストにパスしてしまいますね。どうしてでしょう？
 
 // 実は虚数や0で割り算した場合など，計算結果が実数で表せない値になってしまったとき
 // nan という特殊な数値になります。
 // それでテストがパスしてしまったのですね。
+
+//以下自作
+
+// x^2 + x - 6 = 0 をテスト
+//実数解２つの場合
+- (void)test5
+{
+    e = [[Equation alloc] initWithA:1 b:1 c:-6];
+    
+    STAssertEqualsWithAccuracy(2.0, [e real1], 0.00001, @"real1 error");
+    STAssertEqualsWithAccuracy(-3.0, [e real2], 0.00001, @"real2 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary1], 0.00001, @"imaginary1 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary2], 0.00001, @"imaginary2 error");
+}
+
+// x^2 - 6x + 9 = 0 をテスト
+//重解の場合
+- (void)test6
+{
+    e = [[Equation alloc] initWithA:1 b:-6 c:9];
+    
+    STAssertEqualsWithAccuracy(3.0, [e real1], 0.00001, @"real1 error");
+    STAssertEqualsWithAccuracy(3.0, [e real2], 0.00001, @"real2 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary1], 0.00001, @"imaginary1 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary2], 0.00001, @"imaginary2 error");
+}
+
+// 2x^2 + 2x + 1 = 0 をテスト
+//虚数解の場合
+- (void)test7
+{
+    e = [[Equation alloc] initWithA:2 b:2 c:1];
+    
+    STAssertEqualsWithAccuracy(-0.5, [e real1], 0.00001, @"real1 error");
+    STAssertEqualsWithAccuracy(-0.5, [e real2], 0.00001, @"real2 error");
+    STAssertEqualsWithAccuracy(0.5, [e imaginary1], 0.00001, @"imaginary1 error");
+    STAssertEqualsWithAccuracy(-0.5, [e imaginary2], 0.00001, @"imaginary2 error");
+}
+
 @end
