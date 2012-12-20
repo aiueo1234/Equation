@@ -166,4 +166,32 @@ Equation* e;
     STAssertEqualsWithAccuracy(-0.5, [e imaginary2], 0.00001, @"imaginary2 error");
 }
 
+
+// x^2 = 0 をテスト
+//x=0だけしか答えがない場合
+- (void)test8
+{
+    e = [[Equation alloc] initWithA:1 b:0 c:0];
+    
+    STAssertEqualsWithAccuracy(0.0, [e real1], 0.00001, @"real1 error");
+    STAssertEqualsWithAccuracy(0.0, [e real2], 0.00001, @"real2 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary1], 0.00001, @"imaginary1 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary2], 0.00001, @"imaginary2 error");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @end
